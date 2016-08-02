@@ -58,7 +58,7 @@ def index():
 
 
 # Create admin with custom base template
-admin = admin.Admin(app, 'Example: Layout-BS3', base_template='layout.html', template_mode='bootstrap3')
+admin = admin.Admin(app, 'Example: Layout-BS3', base_template='layout.html', template_mode='adminlte2')
 
 # Add views
 admin.add_view(UserAdmin(User, db.session))

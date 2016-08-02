@@ -47,7 +47,7 @@ class ScreenAdmin(sqla.ModelView):
 
 
 # Create admin
-admin = admin.Admin(app, name='Example: SQLAlchemy2', template_mode='bootstrap3')
+admin = admin.Admin(app, name='Example: SQLAlchemy2', template_mode='adminlte2')
 admin.add_view(ScreenAdmin(Screen, db.session))
 
 if __name__ == '__main__':

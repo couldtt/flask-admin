@@ -8,7 +8,6 @@ from flask_admin.contrib import sqla
 from flask_admin import helpers, expose
 from werkzeug.security import generate_password_hash, check_password_hash
 
-
 # Create Flask application
 app = Flask(__name__)
 
@@ -62,8 +61,8 @@ class LoginForm(form.Form):
 
         # we're comparing the plaintext pw with the the hash from the db
         if not check_password_hash(user.password, self.password.data):
-        # to compare plain text passwords use
-        # if user.password != self.password.data:
+            # to compare plain text passwords use
+            # if user.password != self.password.data:
             raise validators.ValidationError('Invalid password')
 
     def get_user(self):
@@ -93,14 +92,12 @@ def init_login():
 
 # Create customized model view class
 class MyModelView(sqla.ModelView):
-
     def is_accessible(self):
         return login.current_user.is_authenticated
 
 
 # Create customized index view class that handles login & registration
 class MyAdminIndexView(admin.AdminIndexView):
-
     @expose('/')
     def index(self):
         if not login.current_user.is_authenticated:
@@ -159,7 +156,8 @@ def index():
 init_login()
 
 # Create admin
-admin = admin.Admin(app, 'Example: Auth', index_view=MyAdminIndexView(), base_template='my_master.html')
+admin = admin.Admin(app, 'Example: Auth', index_view=MyAdminIndexView(), base_template='my_master.html',
+                    template_mode='adminlte2')
 
 # Add view
 admin.add_view(MyModelView(User, db.session))
@@ -181,7 +179,7 @@ def build_sample_db():
     db.session.add(test_user)
 
     first_names = [
-        'Harry', 'Amelia', 'Oliver', 'Jack', 'Isabella', 'Charlie','Sophie', 'Mia',
+        'Harry', 'Amelia', 'Oliver', 'Jack', 'Isabella', 'Charlie', 'Sophie', 'Mia',
         'Jacob', 'Thomas', 'Emily', 'Lily', 'Ava', 'Isla', 'Alfie', 'Olivia', 'Jessica',
         'Riley', 'William', 'James', 'Geoffrey', 'Lisa', 'Benjamin', 'Stacey', 'Lucy'
     ]
@@ -197,11 +195,13 @@ def build_sample_db():
         user.last_name = last_names[i]
         user.login = user.first_name.lower()
         user.email = user.login + "@example.com"
-        user.password = generate_password_hash(''.join(random.choice(string.ascii_lowercase + string.digits) for i in range(10)))
+        user.password = generate_password_hash(
+            ''.join(random.choice(string.ascii_lowercase + string.digits) for i in range(10)))
         db.session.add(user)
 
     db.session.commit()
     return
+
 
 if __name__ == '__main__':
 
