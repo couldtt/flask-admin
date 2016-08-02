@@ -3,7 +3,7 @@ Flask-Admin with adminLte2 template
 
 Introduction
 ------------
-This is a fork of official flask-admin, and add a new template named admin-lte2,
+This is a fork of official flask-admin, adding a new template named admin-lte2.
 if you want more beautiful admin interface, try it now!
 
 How to use
