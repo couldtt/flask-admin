@@ -88,14 +88,26 @@
 
         </aside>
         <div class="content-wrapper">
-            {% block messages %}
-                {{ layout.messages() }}
-            {% endblock %}
+            <section class="content-header">
+                <h1>
+                    {% block contentname %}
+                        {{ admin_view.menu.name }}
+                    {% endblock %}
+                </h1>
+                <ol class="breadcrumb">
+                    {% block breadcrumb %}
+                    {% endblock %}
+                </ol>
+            </section>
+            <section class="content">
+                {% block messages %}
+                    {{ layout.messages() }}
+                {% endblock %}
 
-            {# store the jinja2 context for form_rules rendering logic #}
-            {% set render_ctx = h.resolve_ctx() %}
+                {% set render_ctx = h.resolve_ctx() %}
 
-            {% block body %}{% endblock %}
+                {% block body %}{% endblock %}
+            </section>
 
         </div>
         <footer class="main-footer">
